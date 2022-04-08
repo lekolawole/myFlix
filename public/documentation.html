@@ -6,12 +6,98 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>myFlix</title>
-<body>
+</head> 
+<body style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
     <header>
         <h1>myFlix</h1>
-        <h2>Documentation</h2>
+        <div style="display: inline-block; width: 100%; background-color:black; color:#fff"><h2>Documentation</h2></div>
         <p>myFlix is an API that enables users to recieve information about movies, directors, and genres of their choosing. The app will invite users to sign up, update personal information, and create lists of their favorite movies.</p>
     </header>
-</head>
+    <div>
+        <h2>Resource Information</h2>
+        <table>
+            <tr>
+                <td>Response Body Formats</td>
+                <td>JSON</td>
+            </tr>
+            <tr>
+                <td>Request Body Formats</td>
+                <td>JSON</td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <h2>Parameters</h2>
+        <table>
+            <tr>
+                <td>q</td>
+                <td>Required</td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <h3>How to use this API:</h3>
+        <div>
+            <h4>Top Movies Array</h4>
+            <p>Information about "Top Movies" contains the following information:</p>
+            <ul>
+                <li>Title</li>
+                <li>Director
+                    <ul><li>Director's Name</li>
+                    <li>Director's Bio</li></li>
+                </ul>
+                <li>Genre</li>
+                <ul><li>Genre Description</li></ul>
+                <li>Release Year</li>
+                <li>Description</li>
+                <li>Image Url</li>
+            </ul>
+        </div>
+        <div>
+            <h4>Users Array</h4>
+            <p>Information about "Top Movies" contains the following information:</p>
+            <ul>
+                <li>ID</li>
+                <li>Name</li>
+                <li>Favorite Movies</li>
+            </ul>
+        </div>
+        <div>
+            <h4>CREATE</h4>
+            <p>This HTTP request allows the client to create a new user.</p>
+        </div>
+        <div>
+            <h4>POST/PUT</h4>
+            <p>Read HTTP requests allow the client to:</p>
+            <ul>
+                <li>Return an list of ALL movies</li>
+                <li>Return movies by {Title}</li>
+                <li>Return descriptions of genres by {Genre Name}</li>
+                <li>Return list of directors by {Director Name}</li>
+            </ul>
+        </div>
+        <div>
+            <h4>UPDATE</h4>
+            <p>Put HTTP requests allow the client to update user by ID.</p>
+            <p>Post HTTP requests allow the user to add {Favorite Movie} title to user.</p>
+        </div>
+        <div>
+            <h4>DELETE</h4>
+            <p>Delete HTTP requests allow the client to:</p>
+            <ul>
+                <li>Remove movies from the {Top Movies} array</li>
+                <li>Allow existing users to delete a user from the user array</li>
+            </ul>
+        </div>
+    </div>
+    <div>
+        <h2>Example Requests</h2>
+        <img src="../public/CREATE.png" alt="Create Request">
+    </div>
+    <div>
+        <h2>Example Response</h2>
+        <img src="../public/reponse.png" alt="response">
+    </div>
+</body>
 </html>
 
