@@ -1,0 +1,5 @@
+{"_id":"1","Username":"JoeMovies99","Password":"ILikeMovies","Email":"joe@movies.com","Birthday":{"$date":"2000-09-10T00:00:00Z"},"FavoriteMovies":[{"$oid":"625980deb9bfd16b69b52021"},{"$oid":"625988c2b9bfd16b69b52025"}]}
+{"_id":"2","Username":"ALgal06","Password":"password9876","Email":"aliag@movies.com","Birthday":{"$date":"1997-05-11T00:00:00Z"},"FavoriteMovies":[{"$oid":"62598e27b9bfd16b69b5202a"},{"$oid":"62598aebb9bfd16b69b52028"}]}
+{"_id":"3","Username":"movieFan29","Password":"password1234","Birthday":{"$date":"1990-08-06T00:00:00Z"},"FavoriteMovies":[{"$oid":"625980deb9bfd16b69b52022"}]}
+{"_id":"4","Username":"kingRichard11","Password":"ggGGhhHH","Email":"richrich@aol.com","Birthday":{"$date":"1972-12-07T00:00:00Z"},"FavoriteMovies":[{"$oid":"625980deb9bfd16b69b52021"}]}
+{"_id":"5","Username":"ralphjackson22","Password":"jjJJrrRR","Birthday":{"$date":"1995-07-09T00:00:00Z"},"FavoriteMovies":[{"$oid":"62598f95b9bfd16b69b5202b"},{"$oid":"62598833b9bfd16b69b52024"}]}
