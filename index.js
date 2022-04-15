@@ -2,10 +2,23 @@ const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const app = express();
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 const uuid = require('uuid');
+const mongoose = require('mongoose');
+const Models = require('./models.js');
+const req = require('express/lib/request');
+
+const Movies = Models.Movie;
+const Users = Models.User;
+const Directors = Models.Director;
+
+mongoose.connect('mongodb://localhost:27017/myFlixDB', {
+    useNewUrlParser: true, useUnifiedTopology: true 
+}); 
 
 //Using Morgan, BodyParser, UUID to log requests
-app.use(bodyParser.json());
+
 app.use(morgan('common'));
 
 let users = [
@@ -39,7 +52,7 @@ let topMovies = [
         }, 
         Year: 2022, 
         Description: 'When the Riddler, a sadistic serial killer, begins murdering key political figures in Gotham, Batman is forced to investigate the city\'s hidden corruption and question his family\'s involvement.',
-        imageUrl: 'https://m.media-amazon.com/images/M/MV5BOGE2NWUwMDItMjA4Yi00N2Y3LWJjMzEtMDJjZTMzZTdlZGE5XkEyXkFqcGdeQXVyODk4OTc3MTY@._V1_.jpg'
+        imageUrl: 'https://m.media-amazon.com/images/M/MV5BOGE2NWUwMDItMjA4Yi00N2YLWJjMzEtMDJjZTMzZTdlZGE5XkEyXkFqcGdeQXVyODk4OTc3MTY@._V1_.jpg'
     },
     {
         title: 'Death On The Nile', 
@@ -167,7 +180,7 @@ let topMovies = [
         },
         Year: 2021, 
         Description: 'FLEE tells the extraordinary true story of a man, Amin, on the verge of marriage which compels him to reveal his hidden past for the first time.',
-        imageUrl: 'https://m.media-amazon.com/images/M/MV5BNWY1NjUyNTktMjM2Ni00YWNlLWE3NzktOTJkMmRjMDUwY2JmXkEyXkFqcGdeQXVyMDM2NDM2MQ@@._V1_.jpg'
+        imageUrl: 'K'
     }
 ];
 
@@ -180,113 +193,143 @@ app.get('/documentation', (req, res) => {
 
 // HTTP Requests 
 
-//CREATE new User
-app.post('/users', (req, res) => {
-    const newUser = req.body;
-
-    if (newUser.name) {
-        newUser.id = uuid.v4();
-        users.push(newUser);
-        res.status(201).json(newUser);
-    } else {
-        res.status(400).send('User needs a name.')
-    };
-});
+//CREATE new User - expecting JSON
 
 
-//READ - returns list of ALL movies 
+
+//READ - returns ALL movies
 app.get('/movies', (req, res) => {
-    res.status(200).json(topMovies)
+    Movies.find()
+    .then((movies) => {
+        res.status(201).json(movies);
+    })
+    .catch((err) => {
+        console.error(err);
+        res.status(500).send('Error: ' + err);
+    });
+});
+//READ - GET movie by Title
+app.get('/movies/:Title', (req, res) => {
+    Movies.findOne({ Title: req.params.Title})
+    .then((movies) => {
+        res.status(201).json(movies);
+    })
+    .catch((err) => {
+        console.error(err);
+        res.status(500).send('Error: ' + err);
+    });
+});
+//READ - GET movies by genre
+app.get('/movies/:Genre', (req, res) => {
+    Movies.find({ Genre: req.params.Genre.Name })
+    .then((movies) => {
+        res.status(201).json(movies);
+    })
+    .catch((err) => {
+        console.error(err);
+        res.status(500).send('Error: ' + err);
+    });
 });
 
-//READ - returns movie by title 
-app.get('/movies/:title', (req, res) => {
-
-    res.status(200).json(topMovies.find((movie) => {
-        return movie.title === req.params.title
-    }));
+//READ - Get Director by name
+app.get('/directors/:Name', (req, res) => {
+    Directors.findOne({ Name: req.params.Name })
+    .then((director) => {
+        res.json(director);
+    })
+    .catch((err) => {
+        console.error(err);
+        res.status(500).send('Error: ' + err);
+    });
+});
+//READ - GET ALL directors
+app.get('/directors', (req, res) => {
+    Directors.find()
+    .then((director) => {
+        res.json(director);
+    })
+    .catch((err) => {
+        console.error(err);
+        res.status(500).send('Error: ' + err);
+    });
 });
 
-//READ - returns descriptions of genres by name 
-app.get('/movies/genre/:genreName', (req, res) => {
-    const {genreName} = req.params;
-    const genre = topMovies.find((movie) => movie.Genre.Name === genreName).Genre;
-
-     if (genre) {
-         res.status(200).json(genre);
-    } else {
-        res.status(400).send('no such genre');
-    };
+//READ - GET all users with Mongoose
+app.get('/users', (req, res) => {
+    Users.find()
+    .then((users) => {
+        res.status(201).json(users);
+    })
+    .catch((err) => {
+        console.error(err);
+        res.status(500).send('Error: ' + err);
+    });
+});
+//READ -GET user by username 
+app.get('/users/:Username', (req, res) => {
+    Users.findOne({ Username: req.params.Username })
+    .then((user) => {
+        res.json(user);
+    })
+    .catch((err) => {
+        console.error(err);
+        res.status(500).send('Error: ' + err);
+    });
 });
 
-//READ - returns descriptions of Directors by name
-app.get('/movies/director/:directorName', (req, res) => {
-    const {directorName} = req.params;
-    const director = topMovies.find((movie) => movie.Director.Name === directorName).Director;
-
-     if (director) {
-         res.status(200).json(director);
-    } else {
-        res.status(400).send('no such genre');
-    };
+//UPDATE - user by username - expecting JSON
+app.put('/users/:Username', (req, res) => {
+    Users.findOneAndUpdate({ Username: req.params.Username }, {$set:
+            {
+                Username: req.body.Username,
+                Password: req.body.Password,
+                Email: req.body.Email,
+                Birthday: req.body.Birthday
+            }
+    }, 
+    {new: true},
+    (err, updatedUser) => {
+        if(err) {
+            console.error(err);
+            res.status(500).send('Error: ' + err);
+        } else {
+            res.json(updatedUser);
+        }
+    });
 });
 
-// UPDATE - update user by id
-
-app.put('/users/:id', (req, res) => {
-    const updatedUser = req.body;
-    const { id } = req.params;
-
-    let user = users.find((user) => user.id == id);
-
-    if (user) {
-        user.name = updatedUser.name;
-        res.status(200).json(user);
-    } else {
-        res.status(400).send('no such user.');
-    }
+// UPDATE or CREATE -  add movie title to user's favorite movies using Mongoose - 
+//Expects Username and MovieID
+app.post('/users/:Username/movies/:MovieID', (req, res) => {
+    Users.findOneAndUpdate({ Username: req.params.Username }, {
+        $push: {FavoriteMovies: req.params.MovieID}
+    }, 
+    { new: true }, 
+    (err, updatedUser) => {
+        if(err) {
+            console.error(err);
+            res.status(500).send('Error: ' + err);
+        } else {
+            res.json(updatedUser);
+        }
+    });
 });
 
-// UPDATE or CREATE -  add movie title to user 
-app.post('/users/:id/:movieTitle', (req, res) => {
-    const { id, movieTitle } = req.params;
 
-    let user = users.find((user) => user.id == id);
-
-    if (user) {
-        user.favoriteMovies.push(movieTitle);
-        res.status(200).send(`${movieTitle} has been added to user ${id}'s array.`);
-    } else {
-        res.status(400).send('no such user.');
-    }
-});
-
-//DELETE - remove movies from array
-app.delete('/users/:id/:movieTitle', (req, res) => {
-    const { id, movieTitle } = req.params;
-
-    let user = users.find((user) => user.id == id);
-
-    if (user) {
-        user.favoriteMovies = user.favoriteMovies.filter( title => title !== movieTitle);
-        res.status(200).send(`${movieTitle} has been removed from user ${id}'s array.`);
-    } else {
-        res.status(400).send('no such user.');
-    }
-});
-
-//DELETE - Allow existing users to delete user from array
-app.delete('/users/:id', (req, res) => {
-    const { id } = req.params;
-
-    let user = users.find((user) => user.id == id);
-
-    if (user) {
-        users = users.filter( user => user.id !== id);
-        res.status(200).send(` User ${id} has been deleted.`);
-    } else {
-        res.status(400).send('no such user.');
-    }
+//DELETE - remove existing user by username using Mongoose
+app.delete('/users/:Username', (req, res) => {
+    Users.findOneAndRemove({ Username: req.params.Username })
+    .then((user) => {
+        if (!user) {
+            res.status(400).send(req.params.Username + ' was not found');
+        } else {
+            res.status(200).send(req.params.Username + ' was deleted.');
+        }
+    })
+    .catch((err) => {
+        console.error(err);
+        res.status(500).send('Error: ' + err);
+    });
 });
 
 
