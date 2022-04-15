@@ -6,12 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>myFlix</title>
+    <link rel="stylesheet" href="styles.css">
 </head> 
-<body style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
+<body>
     <header>
         <h1>myFlix</h1>
-        <div style="display: inline-block; width: 100%; background-color:black; color:#fff"><h2>Documentation</h2></div>
-        <p>myFlix is an API that enables users to recieve information about movies, directors, and genres of their choosing. The app will invite users to sign up, update personal information, and create lists of their favorite movies.</p>
+        <div class="nav-wrapper">
+            <h2>Documentation</h2>
+            <ul class="navbar">
+                <li><a href="#">Resource Information</a></li>
+                <li><a href="#">How To Use</a></li>
+                <li><a href="#">HTTP Requests</a></li>
+                <li><a href="#">Examples</a></li>
+            </ul>
+        </div>
+        <p class="info">myFlix is an API that enables users to recieve information about movies, directors, and genres of their choosing. The app will invite users to sign up, update personal information, and create lists of their favorite movies.</p>
     </header>
     <div>
         <h2>Resource Information</h2>
@@ -42,15 +51,17 @@
             <p>Information about "Top Movies" contains the following information:</p>
             <ul>
                 <li>Title</li>
-                <li>Director
+                <li>Description</li>
+                <li>Genre</li>
+                <ul><li>Genre Description</li></ul>
+                 <li>Director
                     <ul><li>Director's Name</li>
                     <li>Director's Bio</li></li>
                 </ul>
-                <li>Genre</li>
-                <ul><li>Genre Description</li></ul>
                 <li>Release Year</li>
-                <li>Description</li>
+                <li>Rating</li>
                 <li>Image Url</li>
+                <li>Featured (status)</li>
             </ul>
         </div>
         <div>
@@ -58,7 +69,9 @@
             <p>Information about "Top Movies" contains the following information:</p>
             <ul>
                 <li>ID</li>
-                <li>Name</li>
+                <li>Username</li>
+                <li>Password</li>
+                <li>Email</li>
                 <li>Favorite Movies</li>
             </ul>
         </div>
@@ -67,36 +80,39 @@
             <p>This HTTP request allows the client to create a new user.</p>
         </div>
         <div>
-            <h4>POST/PUT</h4>
+            <h4>READ</h4>
             <p>Read HTTP requests allow the client to:</p>
             <ul>
-                <li>Return an list of ALL movies</li>
-                <li>Return movies by {Title}</li>
-                <li>Return descriptions of genres by {Genre Name}</li>
-                <li>Return list of directors by {Director Name}</li>
+                <li>GET a list of ALL movies</li>
+                <li>GET movies by {Title}</li>
+                <li>GET list of ALL directors</li>
+                <li>GET directors by name</li>
             </ul>
         </div>
         <div>
             <h4>UPDATE</h4>
-            <p>Put HTTP requests allow the client to update user by ID.</p>
+            <div>
+                <p>PUT HTTP requests allow the client to update user by Username - expecting JSON.</p>
+            </div>
+           
             <p>Post HTTP requests allow the user to add {Favorite Movie} title to user.</p>
         </div>
         <div>
             <h4>DELETE</h4>
             <p>Delete HTTP requests allow the client to:</p>
             <ul>
-                <li>Remove movies from the {Top Movies} array</li>
-                <li>Allow existing users to delete a user from the user array</li>
+                <li>Remove movies from the movie list</li>
+                <li>Allow existing users to delete a user from the user list</li>
             </ul>
         </div>
     </div>
-    <div>
+    <div class="request-wrapper">
         <h2>Example Requests</h2>
-        <img src="../public/CREATE.png" alt="Create Request">
+        <img src="./create2.png" alt="Create Request" width="600">
     </div>
     <div>
         <h2>Example Response</h2>
-        <img src="../public/reponse.png" alt="response">
+        <img src="./get-all-directors.png" alt="response" width="600">
     </div>
 </body>
 </html>
