@@ -1,3 +1,5 @@
+const { validate } = require('uuid');
+
 const passport = require('passport'),
   LocalStrategy = require('passport-local').Strategy,
   Models = require('./models.js'),
@@ -20,8 +22,15 @@ passport.use(new LocalStrategy({
 
     if (!user) {
       console.log('incorrect username');
-      return callback(null, false, {message: 'Incorrect username or password.'});
-    } else
+      return callback(null, false, {message: 'Incorrect username.'});
+    } 
+    
+    //validates hashed password stored in MongoDB when logging in 
+    if (!validatePassword(password)) {
+        console.log('incorrect password');
+        return callback(null, false, {message: 'Incorrect password.'});
+    }
+    else
 
     console.log('finished');
     return callback(null, user);
