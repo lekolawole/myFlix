@@ -33,9 +33,12 @@ const Movies = Models.Movie;
 const Users = Models.User;
 const Directors = Models.Director;
 
-mongoose.connect('mongodb://localhost:27017/myFlixDB', {
+/*mongoose.connect('mongodb://localhost:27017/myFlixDB', {
     useNewUrlParser: true, useUnifiedTopology: true 
-}); 
+});*/
+mongoose.connect('process.env.CONNECTION_URI', {
+    useNewUrlParser: true, useUnifiedTopology: true 
+});
 
 //Using Morgan, BodyParser, UUID to log requests
 app.use(morgan('common'));
