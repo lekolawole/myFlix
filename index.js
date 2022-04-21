@@ -57,7 +57,7 @@ app.post('/users', (req, res) => {
     //checks validation 
     [check('Username', 'Username is required').isLength({min: 5}),
 
-    check('Username', 'Username contains non alphanumeric characters - not allowed').isAlphanumeric,
+    check('Username', 'Username contains non alphanumeric characters - not allowed').isAlphanumeric(),
 
     check('Password', 'Password is requried').not().isEmpty(),
 

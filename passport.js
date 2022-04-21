@@ -26,7 +26,7 @@ passport.use(new LocalStrategy({
     } 
     
     //validates hashed password stored in MongoDB when logging in 
-    if (!validatePassword(password)) {
+    if (!user.validatePassword(password)) {
         console.log('incorrect password');
         return callback(null, false, {message: 'Incorrect password.'});
     }
