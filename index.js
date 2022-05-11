@@ -7,17 +7,17 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 const cors = require('cors');
 app.use(cors());
-// let allowedOrigins = ['http://localhost:8080','http:testsite.com', 'http://localhost:1234'];
-// app.use(cors({ //restricts domain origin access
-//     origin: (origin, callback) => {
-//         if(!origin) return callback(null, true);
-//         if(allowedOrigins.indexOf(origin) === -1){ //finds origin & compares
-//             let message = 'The CORS policy for this application does not allow access from origin ' + origin;
-//             return callback(new Error(message ), false);
-//         }
-//         return callback(null, true);
-//     }
-// }));
+let allowedOrigins = ['http://localhost:8080','http:testsite.com', 'http://localhost:1234'];
+app.use(cors({ //restricts domain origin access
+    origin: (origin, callback) => {
+        if(!origin) return callback(null, true);
+        if(allowedOrigins.indexOf(origin) === -1){ //finds origin & compares
+            let message = 'The CORS policy for this application does not allow access from origin ' + origin;
+            return callback(new Error(message ), false);
+        }
+        return callback(null, true);
+    }
+}));
 
 let auth = require('./auth')(app);
 const passport = require('passport');
@@ -109,16 +109,6 @@ app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) 
         res.status(500).send('Error: ' + err);
     });
 });
-// app.get("/movies", function (req, res) {
-//   Movies.find()
-//     .then(function (movies) {
-//       res.status(201).json(movies);
-//     })
-//     .catch(function (error) {
-//       console.error(error);
-//       res.status(500).send("Error: " + error);
-//     });
-// });
 
 
 //READ - GET movie by Title
