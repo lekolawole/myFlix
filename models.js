@@ -19,8 +19,10 @@ let movieSchema = mongoose.Schema({
         Description: String 
     },
     Director: {
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: 'Director'
+        _id: mongoose.Schema.Types.ObjectId, 
+        ref: 'Director',
+        Name: String,
+        Bio: String
     },
     ReleaseYear: String,
     Rating: String,
