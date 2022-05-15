@@ -23,6 +23,7 @@ let movieSchema = mongoose.Schema({
         ref: 'Director',
         Name: String,
         Bio: String
+        //added for DirectorView
     },
     ReleaseYear: String,
     Rating: String,
