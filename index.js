@@ -227,7 +227,7 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }), (r
 //Expects Username and MovieID
 app.post('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { session: false }), (req, res) => {
     Users.findOneAndUpdate({ Username: req.params.Username }, {
-        $push: {FavoriteMovies: req.params.MovieID}
+        $push: {FavoriteMovies: req.params.Movie}
     }, 
     { new: true }, 
     (err, updatedUser) => {
