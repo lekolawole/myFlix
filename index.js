@@ -225,7 +225,9 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }), (r
 
 // UPDATE or CREATE -  add movie title to user's favorite movies using Mongoose - 
 //Expects Username and MovieID
-app.post('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { session: false }), (req, res) => {
+app.post('/users/:Username/movies/:MovieID', 
+    // passport.authenticate('jwt', { session: false }), 
+    (req, res) => {
     Users.findOneAndUpdate({ Username: req.params.Username }, {
         $push: {FavoriteMovies: req.params.MovieID}
     }, 
