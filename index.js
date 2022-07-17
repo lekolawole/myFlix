@@ -7,7 +7,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 const cors = require('cors');
 //app.use(cors());
-let allowedOrigins = ['http://localhost:8080','http:testsite.com', 'http://localhost:1234', 'https://myflixgo.netlify.app'];
+let allowedOrigins = ['http://localhost:8080','http:testsite.com', 'http://localhost:1234', 'https://myflixgo.netlify.app', 'https://my-flix-go.vercel.app'];
 app.use(cors({ //restricts domain origin access
     origin: (origin, callback) => {
         if(!origin) return callback(null, true);
