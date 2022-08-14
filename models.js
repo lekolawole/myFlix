@@ -36,7 +36,7 @@ let userSchema = mongoose.Schema({
     Password: {type: String, required: true},
     Email: {type: String, required: true},
     Birthday: Date,
-    //FavoriteMovies: [{type: mongoose.Schema.Types.ObjectId, ref: 'Movie'}]
+    //FavoriteMovies: [{type: mongoose.Schema.Types.ObjectId, ref: 'Movie'}] - use for referenced movie._id in MongoDB collection
     FavoriteMovies: [{
         Title: String, ref: 'Movie',
         ImagePath: String, ref: 'Movie',
