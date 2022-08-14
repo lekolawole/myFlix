@@ -1,5 +1,5 @@
 # MyFlix API
-Part of the documentation for myFlix API, the server-side project built with Mongo, Express, and Node.
+Part of the documentation for myFlix API, the server-side project built with Mongo, Express, and Node. Link to full documentation <a href="https://my-flix-22.herokuapp.com/documentation">here</a>.
 
 ## Description 
 This web app allows users to register/login, search movies titles, update profile information, and save their favorite movies. 
