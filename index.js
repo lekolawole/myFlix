@@ -54,7 +54,7 @@ app.use(morgan('common'));
 app.get('/', (req, res) => {res.send('🎥It\'s movie time!')});
 
 app.get('/documentation', (req, res) => {
-    res.sendFile('out/index.html', {root: __dirname });
+    res.sendFile('public/documentation.html', {root: __dirname });
 });
 
 /* HTTP Requests */
