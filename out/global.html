@@ -98,7 +98,7 @@
 
         
             
-<h4 class="name" id="auth"><span class="type-signature"></span>auth<span class="type-signature"></span></h4>
+<h4 class="name" id="auth"><span class="type-signature"></span>Authentication<span class="type-signature"></span></h4>
 
 
 
@@ -160,7 +160,7 @@
 
         
             
-<h4 class="name" id="Movies"><span class="type-signature">(constant) </span>Movies<span class="type-signature"></span></h4>
+<h4 class="name" id="Movies"><span class="type-signature">(constant) </span>Movie Data<span class="type-signature"></span></h4>
 
 
 
@@ -215,6 +215,182 @@
     
 </dl>
 
+<h4 class="name" id="api-queries"><span class="type-signature"></span>API Queries<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    Making HTTP Requests
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line60">line 60</a>
+    </li></ul></dd>
+    <dd>
+        <ul>
+            <li>Create a new user
+                <p>@param { 
+                    Username: "String",
+                    Password: "String",
+                    Email: "String",
+                    Birthday: "Date"
+                }
+                </p>
+            </li>
+        </ul>
+    </dd>
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line113">line 113</a>
+    </li></ul></dd>
+    <dd>
+        <ul>
+            <li>Fetch all movies
+                <p>@param [movies]</p>
+            </li>
+        </ul>
+    </dd>
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line133">line 133</a>
+    </li></ul></dd>
+    <dd>
+        <ul>
+            <li>Fetch Movies by Title
+                <p>@param { movie.Title }</p>
+            </li>
+        </ul>
+    </dd>
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line153">line 153</a>
+    </li></ul></dd>
+    <dd>
+        <ul>
+            <li>Fetch Movies by Genre
+                <p>@param { movie.Genre }</p>
+            </li>
+        </ul>
+    </dd>
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line173">line 173</a>
+    </li></ul></dd>
+    <dd>
+        <ul>
+            <li>Fetch Director by Name
+                <p>@param { movieDirector.Name }</p>
+            </li>
+        </ul>
+    </dd>
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line235">line 235</a>
+    </li></ul></dd>
+    <dd>
+        <ul>
+            <li>Fetch User by Username
+                <p>@param { Username }</p>
+            </li>
+        </ul>
+    </dd>
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line255">line 255</a>
+    </li></ul></dd>
+    <dd>
+        <ul>
+            <li>Update user data
+                <p>@param { Username: "String", Password: "String",
+                Email: "String"}</p>
+            </li>
+        </ul>
+    </dd>
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line305">line 305</a>
+    </li></ul></dd>
+    <dd>
+        <ul>
+            <li>Update user favorite movies data
+                <p>@param { Username, movie._id}
+                </p>
+            </li>
+        </ul>
+    </dd>
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line356">line 356</a>
+    </li></ul></dd>
+    <dd>
+        <ul>
+            <li>Remove title from user favorite movies
+                <p>@param { 
+                    Username, movie._id
+                }
+                </p>
+            </li>
+        </ul>
+    </dd>
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="index.js.html">index.js</a>, <a href="index.js.html#line331">line 331</a>
+    </li></ul></dd>
+    <dd>
+        <ul>
+            <li>Delete existing user
+                <p>@param { 
+                    Username: "String",
+                }
+                </p>
+            </li>
+        </ul>
+    </dd>
+    
+    
+
+    
+
+    
+
+    
+</dl>
+
 
 
 
@@ -238,7 +414,9 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#auth">auth</a></li><li><a href="global.html#Movies">Movies</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#auth">auth</a></li><li><a href="global.html#Movies">Movies</a></li>
+    <li><li><a href="global.html#api-queries">API Queries</a></li>
+    </ul>
 </nav>
 
 <br class="clear">
